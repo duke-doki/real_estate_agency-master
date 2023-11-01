@@ -3,14 +3,16 @@
 from django.db import migrations
 import phonenumbers
 
+
 def normalize_number(apps, schema_editor):
     Flat = apps.get_model('property', 'Flat')
     for flat in Flat.objects.all():
-        flat.owner_pure_phone = phonenumbers.parse(
+        normal_number = phonenumbers.parse(
             flat.owners_phonenumber, "RU"
         )
+        if phonenumbers.is_valid_number(normal_number):
+            flat.owner_pure_phone = normal_number
         flat.save()
-
 
 
 class Migration(migrations.Migration):
