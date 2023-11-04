@@ -77,6 +77,9 @@ class Complaint(models.Model):
                              related_name='complained_by')
     complaint = models.TextField('Текст жалобы', blank=True)
 
+    def __str__(self):
+        return self.user
+
 
 class Owner(models.Model):
     owner = models.CharField('ФИО владельца', max_length=200, db_index=True)
