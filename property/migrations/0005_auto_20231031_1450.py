@@ -5,14 +5,9 @@ from django.db import migrations
 
 def fill_empty_boxes(apps, schema_editor):
     Flat = apps.get_model('property', 'Flat')
-    for flat in Flat.objects.all():
-        if not flat.construction_year:
-            continue
-        if flat.construction_year >= 2015:
-            flat.new_building = True
-        else:
-            flat.new_building = False
-        flat.save()
+    Flat.objects.filter(construction_year__gte=2015).update(new_building=True)
+    Flat.objects.filter(construction_year__lt=2015).update(new_building=False)
+
 
 
 
