@@ -6,7 +6,8 @@ import phonenumbers
 
 def normalize_number(apps, schema_editor):
     Flat = apps.get_model('property', 'Flat')
-    for flat in Flat.objects.all():
+    flats = Flat.objects.all()
+    for flat in flats.iterator():
         normal_number = phonenumbers.parse(
             flat.owners_phonenumber, "RU"
         )
