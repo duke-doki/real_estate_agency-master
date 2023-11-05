@@ -66,10 +66,10 @@ class Flat(models.Model):
 class Complaint(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE,
                              verbose_name='Кто жаловался',
-                             related_name='complained_by')
+                             related_name='complained')
     flat = models.ForeignKey(Flat, on_delete=models.CASCADE,
                              verbose_name='Квартира, на которую пожаловались',
-                             related_name='complained_by')
+                             related_name='complained')
     complaint = models.TextField('Текст жалобы', blank=True)
 
     def __str__(self):
