@@ -82,9 +82,9 @@ class Owner(models.Model):
     pure_phone = PhoneNumberField('Нормализованный Номер владельца',
                                   blank=True, db_index=True
                                   )
-    owned_by = models.ManyToManyField(Flat,
-                                      verbose_name='Квартиры в собственности',
-                                      related_name='owners')
+    flats = models.ManyToManyField(Flat,
+                                   verbose_name='Квартиры в собственности',
+                                   related_name='owners')
 
     def __str__(self):
         return self.name
